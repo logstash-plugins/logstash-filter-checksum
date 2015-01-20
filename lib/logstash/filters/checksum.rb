@@ -11,7 +11,6 @@ require "logstash/namespace"
 class LogStash::Filters::Checksum < LogStash::Filters::Base
 
   config_name "checksum"
-  milestone 1
 
   ALGORITHMS = ["md5", "sha", "sha1", "sha256", "sha384",]
 
