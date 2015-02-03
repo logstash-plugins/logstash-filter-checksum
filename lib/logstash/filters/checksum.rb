@@ -36,9 +36,8 @@ class LogStash::Filters::Checksum < LogStash::Filters::Base
 
     @keys.sort.each do |k|
       @logger.debug("Adding key to string", :current_key => k)
-      to_checksum << "|#{k}|#{event[k]}"
+      to_checksum << "#{event[k]}"
     end
-    to_checksum << "|"
     @logger.debug("Final string built", :to_checksum => to_checksum)
 
 
