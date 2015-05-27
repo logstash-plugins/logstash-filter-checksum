@@ -31,7 +31,8 @@ class LogStash::Filters::Checksum < LogStash::Filters::Base
   public
   def filter(event)
     return unless filter?(event)
-
+    #LOGSTASH-1104 Clear the to_checksum field - to allow same checksum generated for the same message
+    @to_checksum = ""
     @logger.debug("Running checksum filter", :event => event)
 
     @keys.sort.each do |k|
