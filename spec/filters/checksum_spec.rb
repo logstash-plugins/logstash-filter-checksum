@@ -19,7 +19,7 @@ describe LogStash::Filters::Checksum do
 
       sample "test" => "foo bar" do
         insist { !subject["logstash_checksum"].nil? }
-        insist { subject["logstash_checksum"] } == OpenSSL::Digest.hexdigest(alg, "|test|foo bar|")
+        insist { subject["logstash_checksum"] } == OpenSSL::Digest.hexdigest(alg, "foo bar")
       end
     end
 
@@ -35,7 +35,7 @@ describe LogStash::Filters::Checksum do
 
       sample "test1" => "foo", "test2" => "bar" do
         insist { !subject["logstash_checksum"].nil? }
-        insist { subject["logstash_checksum"] } == OpenSSL::Digest.hexdigest(alg, "|test1|foo|test2|bar|")
+        insist { subject["logstash_checksum"] } == OpenSSL::Digest.hexdigest(alg, "foobar")
       end
     end
   end
