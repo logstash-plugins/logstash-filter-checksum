@@ -29,7 +29,7 @@ class LogStash::Filters::Checksum < LogStash::Filters::Base
 
   public
   def filter(event)
-    return unless filter?(event)
+    
     to_checksum = ""
 
     @logger.debug("Running checksum filter", :event => event)
