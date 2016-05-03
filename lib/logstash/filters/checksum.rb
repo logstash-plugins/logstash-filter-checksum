@@ -36,7 +36,7 @@ class LogStash::Filters::Checksum < LogStash::Filters::Base
 
     @keys.sort.each do |k|
       @logger.debug("Adding key to string", :current_key => k)
-      to_checksum << "#{event[k]}"
+      to_checksum << "#{event.get(k)}"
     end
     @logger.debug("Final string built", :to_checksum => to_checksum)
 
@@ -45,6 +45,6 @@ class LogStash::Filters::Checksum < LogStash::Filters::Base
     digested_string = OpenSSL::Digest.hexdigest(@algorithm, to_checksum).force_encoding(Encoding::UTF_8)
 
     @logger.debug("Digested string", :digested_string => digested_string)
-    event['logstash_checksum'] = digested_string
+    event.set('logstash_checksum', digested_string)
   end
 end # class LogStash::Filters::Checksum
